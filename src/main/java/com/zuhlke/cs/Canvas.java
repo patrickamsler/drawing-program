@@ -62,12 +62,20 @@ public class Canvas {
         }
     }
 
-    public void paint() {
+    public String render() {
+        StringBuffer buffer = new StringBuffer();
+
         for (int y = 0; y < pixels[0].length; y++) {
             for (int x = 0; x < pixels.length; x++) {
-                System.out.print(pixels[x][y]);
+                buffer.append(pixels[x][y]);
             }
-            System.out.println();
+            buffer.append('\n');
         }
+
+        return buffer.toString();
+    }
+
+    public void print() {
+        System.out.println(render());
     }
 }

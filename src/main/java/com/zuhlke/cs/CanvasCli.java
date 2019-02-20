@@ -1,6 +1,5 @@
 package com.zuhlke.cs;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class CanvasCli {
@@ -39,19 +38,19 @@ public class CanvasCli {
                 int canvasWidth = parseInt(args[1]);
                 int canvasHeight = parseInt(args[2]);
                 canvas = new Canvas(canvasWidth, canvasHeight);
-                canvas.paint();
+                canvas.print();
                 break;
             case 'L':
                 throwExceptionForIllegalNumOfArgs(input, 4);
                 Line line = new Line(parseInt(args[1]), parseInt(args[2]), parseInt(args[3]), parseInt(args[4]));
                 canvas.drawLine(line);
-                canvas.paint();
+                canvas.print();
                 break;
             case 'R':
                 throwExceptionForIllegalNumOfArgs(input, 4);
                 Rectangle rectangle = new Rectangle(parseInt(args[1]), parseInt(args[2]), parseInt(args[3]), parseInt(args[4]));
                 canvas.drawRectangle(rectangle);
-                canvas.paint();
+                canvas.print();
                 break;
             case 'B':
                 throwExceptionForIllegalNumOfArgs(input, 3);
