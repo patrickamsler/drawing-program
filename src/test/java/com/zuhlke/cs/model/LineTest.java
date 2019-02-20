@@ -1,5 +1,6 @@
-package com.zuhlke.cs;
+package com.zuhlke.cs.model;
 
+import com.zuhlke.cs.model.Line;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

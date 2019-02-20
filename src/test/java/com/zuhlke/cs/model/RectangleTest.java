@@ -1,5 +1,7 @@
-package com.zuhlke.cs;
+package com.zuhlke.cs.model;
 
+import com.zuhlke.cs.model.Line;
+import com.zuhlke.cs.model.Rectangle;
 import org.junit.Test;
 
 import java.util.List;

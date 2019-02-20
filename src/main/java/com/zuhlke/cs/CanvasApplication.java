@@ -1,17 +1,20 @@
 package com.zuhlke.cs;
 
+import com.zuhlke.cs.model.Line;
+import com.zuhlke.cs.model.Rectangle;
+
 import java.util.Scanner;
 
-public class CanvasCli {
+public class CanvasApplication {
 
     private Canvas canvas;
 
-    private CanvasCli() {
+    private CanvasApplication() {
 
     }
 
     public static void main(String... args) {
-        CanvasCli canvasCli = new CanvasCli();
+        CanvasApplication canvasApplication = new CanvasApplication();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine().trim();
@@ -19,7 +22,7 @@ public class CanvasCli {
                 continue;
             }
             try {
-                canvasCli.parseInput(input);
+                canvasApplication.parseInput(input);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

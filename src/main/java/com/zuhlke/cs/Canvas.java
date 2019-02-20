@@ -1,5 +1,8 @@
 package com.zuhlke.cs;
 
+import com.zuhlke.cs.model.Line;
+import com.zuhlke.cs.model.Rectangle;
+
 import java.util.*;
 
 public class Canvas {
