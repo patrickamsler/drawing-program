@@ -32,12 +32,24 @@ public class CanvasTestFixtures {
                 ;
     }
 
-    public static String emptyCanvas20x4WithRectangle() {
+    public static String canvas20x4WithRectangle() {
         return "----------------------\n" +
                 "| xxx                |\n" +
                 "| x x                |\n" +
                 "| xxx                |\n" +
                 "|                    |\n" +
+                "----------------------\n"
+                ;
+    }
+
+    public static String canvas20x6WithFilledArea() {
+        return "----------------------\n" +
+                "|  xyyyyyyyyyyyyyyyyy|\n" +
+                "|  xyyyyyyyyyyyyyyyyy|\n" +
+                "|xxxxxxxxxxxxxxxxxxxx|\n" +
+                "|  x                 |\n" +
+                "|  x                 |\n" +
+                "|  x                 |\n" +
                 "----------------------\n"
                 ;
     }

@@ -65,7 +65,19 @@ public class CanvasTest {
         canvas.drawRectangle(rectangle);
         String output = canvas.render();
 
-        assertEquals(emptyCanvas20x4WithRectangle(), output);
+        assertEquals(canvas20x4WithRectangle(), output);
     }
 
+
+    @Test
+    public void fillShouldFillEmptyArea() {
+        Canvas canvas = new Canvas(20, 6);
+
+        canvas.drawLine(1, 3, 20, 3, 'x');
+        canvas.drawLine(3, 1, 3, 6, 'x');
+        canvas.fill(5, 1, 'y');
+        String output = canvas.render();
+
+        assertEquals(canvas20x6WithFilledArea(), output);
+    }
 }

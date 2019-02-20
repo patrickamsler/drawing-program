@@ -6,7 +6,7 @@ public class CanvasCli {
 
     private Canvas canvas;
 
-    public CanvasCli() {
+    private CanvasCli() {
 
     }
 
@@ -54,9 +54,8 @@ public class CanvasCli {
                 break;
             case 'B':
                 throwExceptionForIllegalNumOfArgs(input, 3);
-                int width = parseInt(args[1]);
-                int height = parseInt(args[2]);
-                char color = args[3].charAt(0);
+                canvas.fill(parseInt(args[1]), parseInt(args[2]), args[3].charAt(0));
+                canvas.print();
                 break;
             case 'Q':
                 System.exit(0);
