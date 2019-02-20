@@ -16,6 +16,11 @@ public class CanvasTest {
         assertEquals(emptyCanvas20x4(), output);
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void newCanvasSmallerThan2ThrowsException() {
+        new Canvas(1, 1);
+    }
+
     @Test
     public void drawHorizontalLine() {
         Canvas canvas = new Canvas(20, 4);
@@ -79,5 +84,18 @@ public class CanvasTest {
         String output = canvas.render();
 
         assertEquals(canvas20x6WithFilledArea(), output);
+    }
+
+    @Test
+    public void fillLargeArea() {
+        int width = 1000;
+        int height = 1000;
+        Canvas canvas = new Canvas(width, height);
+
+        long start = System.currentTimeMillis();
+        canvas.fill(5, 1, 'y');
+        long stop = System.currentTimeMillis();
+
+        System.out.printf("Fill area %sx%s takes: %dms", width, height, stop - start);
     }
 }
