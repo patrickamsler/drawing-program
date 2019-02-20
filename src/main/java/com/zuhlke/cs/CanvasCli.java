@@ -30,7 +30,7 @@ public class CanvasCli {
     private void parseInput(String input) {
         char cmd = input.toUpperCase().charAt(0);
         String args[] = input.split("\\s+");
-        if ((cmd == 'C' || cmd == 'Q') && canvas == null) {
+        if (cmd != 'C' && cmd != 'Q' && canvas == null) {
             throw new IllegalArgumentException("Create new canvas first. E.g. 'C 4 5'");
         }
         switch (cmd) {
@@ -43,17 +43,15 @@ public class CanvasCli {
                 break;
             case 'L':
                 throwExceptionForIllegalNumOfArgs(input, 4);
-                int lineX1 = parseInt(args[1]);
-                int lineY1 = parseInt(args[2]);
-                int lineX2 = parseInt(args[3]);
-                int lineY2 = parseInt(args[4]);
+                Line line = new Line(parseInt(args[1]), parseInt(args[2]), parseInt(args[3]), parseInt(args[4]));
+                canvas.drawLine(line);
+                canvas.paint();
                 break;
             case 'R':
                 throwExceptionForIllegalNumOfArgs(input, 4);
-                int recX1 = parseInt(args[1]);
-                int recY1 = parseInt(args[2]);
-                int recX2 = parseInt(args[3]);
-                int recY2 = parseInt(args[4]);
+                Rectangle rectangle = new Rectangle(parseInt(args[1]), parseInt(args[2]), parseInt(args[3]), parseInt(args[4]));
+                canvas.drawRectangle(rectangle);
+                canvas.paint();
                 break;
             case 'B':
                 throwExceptionForIllegalNumOfArgs(input, 3);
