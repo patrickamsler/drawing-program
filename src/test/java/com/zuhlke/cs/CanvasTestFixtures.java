@@ -2,7 +2,7 @@ package com.zuhlke.cs;
 
 public class CanvasTestFixtures {
 
-    public static String emptyCanvas20x4() {
+    static String emptyCanvas20x4() {
         return "----------------------\n" +
                 "|                    |\n" +
                 "|                    |\n" +
@@ -12,7 +12,7 @@ public class CanvasTestFixtures {
                 ;
     }
 
-    public static String canvas20x4WithHorizontalLine() {
+    static String canvas20x4WithHorizontalLine() {
         return "----------------------\n" +
                 "|                    |\n" +
                 "|xxxxxx              |\n" +
@@ -22,7 +22,7 @@ public class CanvasTestFixtures {
                 ;
     }
 
-    public static String canvas20x4WithVerticalLine() {
+    static String canvas20x4WithVerticalLine() {
         return "----------------------\n" +
                 "| x                  |\n" +
                 "| x                  |\n" +
@@ -32,7 +32,7 @@ public class CanvasTestFixtures {
                 ;
     }
 
-    public static String canvas20x4WithRectangle() {
+    static String canvas20x4WithRectangle() {
         return "----------------------\n" +
                 "| xxx                |\n" +
                 "| x x                |\n" +
@@ -42,7 +42,7 @@ public class CanvasTestFixtures {
                 ;
     }
 
-    public static String canvas20x6WithFilledArea() {
+    static String canvas20x6WithFilledArea() {
         return "----------------------\n" +
                 "|  xyyyyyyyyyyyyyyyyy|\n" +
                 "|  xyyyyyyyyyyyyyyyyy|\n" +
@@ -50,6 +50,30 @@ public class CanvasTestFixtures {
                 "|  x                 |\n" +
                 "|  x                 |\n" +
                 "|  x                 |\n" +
+                "----------------------\n"
+                ;
+    }
+
+    static String canvas20x6WithFilledArea2() {
+        return "----------------------\n" +
+                "|  xxxxxxxxxxxxxxxxxx|\n" +
+                "|  xxxxxxxxxxxxxxxxxx|\n" +
+                "|xxxxxxxxxxxxxxxxxxxx|\n" +
+                "|  x                 |\n" +
+                "|  x                 |\n" +
+                "|  x                 |\n" +
+                "----------------------\n"
+                ;
+    }
+
+    static String canvas20x6WithFilledArea3() {
+        return "----------------------\n" +
+                "|  zzzzzzzzzzzzzzzzzz|\n" +
+                "|  zzzzzzzzzzzzzzzzzz|\n" +
+                "|zzzzzzzzzzzzzzzzzzzz|\n" +
+                "|  z                 |\n" +
+                "|  z                 |\n" +
+                "|  z                 |\n" +
                 "----------------------\n"
                 ;
     }

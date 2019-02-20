@@ -87,6 +87,28 @@ public class CanvasTest {
     }
 
     @Test
+    public void fillShouldFillColoredArea() {
+        Canvas canvas = new Canvas(20, 6);
+
+        // color with y
+        canvas.drawLine(1, 3, 20, 3, 'x');
+        canvas.drawLine(3, 1, 3, 6, 'x');
+        canvas.fill(5, 1, 'y');
+        String output = canvas.render();
+        assertEquals(canvas20x6WithFilledArea(), output);
+
+        // color with x
+        canvas.fill(5, 2, 'x');
+        output = canvas.render();
+        assertEquals(canvas20x6WithFilledArea2(), output);
+
+        // color with z
+        canvas.fill(5, 3, 'z');
+        output = canvas.render();
+        assertEquals(canvas20x6WithFilledArea3(), output);
+    }
+
+    @Test
     public void fillLargeArea() {
         int width = 1000;
         int height = 1000;

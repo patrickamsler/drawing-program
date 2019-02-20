@@ -73,8 +73,9 @@ public class Canvas {
         if (x < 1 || x > width || y < 1 || y > height) {
             return;
         }
-        if (pixels[x][y] != EMPTY_PIXEL) {
-            return; // we can fill only empty space
+        char actualColor = pixels[x][y];
+        if (actualColor == color) {
+            return;
         }
 
         LinkedList<Pixel> queue = new LinkedList<>();
@@ -84,36 +85,37 @@ public class Canvas {
 
         while (!queue.isEmpty()) {
             Pixel next = queue.poll();
-            colorEmptyNeighborsAndAddToQueue(next, color, queue);
+            colorEmptyNeighborsAndAddToQueue(queue, next, color, actualColor);
         }
     }
 
-    private void colorEmptyNeighborsAndAddToQueue(Pixel pixel, char color, Queue<Pixel> queue) {
+    private void colorEmptyNeighborsAndAddToQueue(Queue<Pixel> queue, Pixel pixel, char color, char actualColor) {
         int x = pixel.x;
         int y = pixel.y;
 
         //left
-        if (x - 1 > 0 && pixels[x - 1][y] == EMPTY_PIXEL) {
+        if (x - 1 > 0 && pixels[x - 1][y] == actualColor) {
             pixels[x - 1][y] = color;
             queue.add(new Pixel(x - 1, y));
         }
         //right
-        if (x + 1 <= width && pixels[x + 1][y] == EMPTY_PIXEL) {
+        if (x + 1 <= width && pixels[x + 1][y] == actualColor) {
             pixels[x + 1][y] = color;
             queue.add(new Pixel(x + 1, y));
         }
         //up
-        if (y - 1 > 0 && pixels[x][y - 1] == EMPTY_PIXEL) {
+        if (y - 1 > 0 && pixels[x][y - 1] == actualColor) {
             pixels[x][y - 1] = color;
             queue.add(new Pixel(x, y - 1));
         }
         //down
-        if (y + 1 <= height && pixels[x][y + 1] == EMPTY_PIXEL) {
+        if (y + 1 <= height && pixels[x][y + 1] == actualColor) {
             pixels[x][y + 1] = color;
             queue.add(new Pixel(x, y + 1));
         }
     }
 
+    // we use package default in order to access the method from the unit tests
     String render() {
         StringBuilder buffer = new StringBuilder();
 
