@@ -1,8 +1,10 @@
 package com.zuhlke.cs.model;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
-public class Line {
+public class Line implements Shape {
 
     private final int x1;
     private final int y1;
@@ -24,6 +26,17 @@ public class Line {
         this.x2 = Math.max(x1, x2);
         this.y2 = Math.max(y1, y2);
         this.color = color;
+    }
+
+    @Override
+    public List<Line> getLines() {
+        return Arrays.asList(new Line(x1, y1, x2, y2));
+    }
+
+    @Override
+    public boolean intersects(Rectangle bounds) {
+        // TODO
+        return false;
     }
 
     public int getX1() {

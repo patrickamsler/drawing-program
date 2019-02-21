@@ -3,7 +3,7 @@ package com.zuhlke.cs.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rectangle {
+public class Rectangle implements Shape {
 
     private final int x1;
     private final int y1;
@@ -23,6 +23,7 @@ public class Rectangle {
         this.color = color;
     }
 
+    @Override
     public List<Line> getLines() {
         List<Line> lines = new ArrayList<>();
         lines.add(new Line(x1, y1, x2, y1, color));
@@ -30,6 +31,12 @@ public class Rectangle {
         lines.add(new Line(x2, y2, x1, y2, color));
         lines.add(new Line(x1, y2, x1, y1, color));
         return lines;
+    }
+
+    @Override
+    public boolean intersects(Rectangle bounds) {
+        // TODO
+        return false;
     }
 
     public int getX1() {

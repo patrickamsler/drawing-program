@@ -46,13 +46,13 @@ public class CanvasApplication {
             case 'L':
                 throwExceptionForIllegalNumOfArgs(input, 4);
                 Line line = new Line(parseInt(args[1]), parseInt(args[2]), parseInt(args[3]), parseInt(args[4]));
-                canvas.drawLine(line);
+                canvas.drawShape(line);
                 canvas.print();
                 break;
             case 'R':
                 throwExceptionForIllegalNumOfArgs(input, 4);
                 Rectangle rectangle = new Rectangle(parseInt(args[1]), parseInt(args[2]), parseInt(args[3]), parseInt(args[4]));
-                canvas.drawRectangle(rectangle);
+                canvas.drawShape(rectangle);
                 canvas.print();
                 break;
             case 'B':

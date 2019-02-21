@@ -1,5 +1,6 @@
 package com.zuhlke.cs;
 
+import com.zuhlke.cs.model.Line;
 import com.zuhlke.cs.model.Rectangle;
 import org.junit.Test;
 
@@ -25,8 +26,9 @@ public class CanvasTest {
     @Test
     public void drawHorizontalLine() {
         Canvas canvas = new Canvas(20, 4);
+        Line line = new Line(1, 2, 6, 2, 'x');
 
-        canvas.drawLine(1, 2, 6, 2, 'x');
+        canvas.drawShape(line);
         String output = canvas.render();
 
         assertEquals(canvas20x4WithHorizontalLine(), output);
@@ -35,8 +37,9 @@ public class CanvasTest {
     @Test
     public void drawVerticalLine() {
         Canvas canvas = new Canvas(20, 4);
+        Line line = new Line(2, 1, 2, 4, 'x');
 
-        canvas.drawLine(2, 1, 2, 4, 'x');
+        canvas.drawShape(line);
         String output = canvas.render();
 
         assertEquals(canvas20x4WithVerticalLine(), output);
@@ -45,8 +48,9 @@ public class CanvasTest {
     @Test
     public void drawLineLongerThanCanvas() {
         Canvas canvas = new Canvas(20, 4);
+        Line line = new Line(2, 0, 2, 42, 'x');
 
-        canvas.drawLine(2, 0, 2, 42, 'x');
+        canvas.drawShape(line);
         String output = canvas.render();
 
         assertEquals(canvas20x4WithVerticalLine(), output);
@@ -55,9 +59,11 @@ public class CanvasTest {
     @Test
     public void linesOutOfBoundsAreNotVisible() {
         Canvas canvas = new Canvas(20, 4);
+        Line line1 = new Line(1, 5, 4, 5, 'x');
+        Line line2 = new Line(42, 1, 42, 3, 'x');
 
-        canvas.drawLine(1, 4, 4, 5, 'x');
-        canvas.drawLine(42, 1, 42, 3, 'x');
+        canvas.drawShape(line1);
+        canvas.drawShape(line2);
         String output = canvas.render();
 
         assertEquals(emptyCanvas20x4(), output);
@@ -68,7 +74,7 @@ public class CanvasTest {
         Canvas canvas = new Canvas(20, 4);
 
         Rectangle rectangle = new Rectangle(2,1,4,3);
-        canvas.drawRectangle(rectangle);
+        canvas.drawShape(rectangle);
         String output = canvas.render();
 
         assertEquals(canvas20x4WithRectangle(), output);
@@ -78,9 +84,11 @@ public class CanvasTest {
     @Test
     public void fillShouldFillEmptyArea() {
         Canvas canvas = new Canvas(20, 6);
+        Line line1 = new Line(1, 3, 20, 3, 'x');
+        Line line2 = new Line(3, 1, 3, 6, 'x');
 
-        canvas.drawLine(1, 3, 20, 3, 'x');
-        canvas.drawLine(3, 1, 3, 6, 'x');
+        canvas.drawShape(line1);
+        canvas.drawShape(line2);
         canvas.fill(5, 1, 'y');
         String output = canvas.render();
 
@@ -90,10 +98,13 @@ public class CanvasTest {
     @Test
     public void fillShouldFillColoredArea() {
         Canvas canvas = new Canvas(20, 6);
+        Line line1 = new Line(1, 3, 20, 3, 'x');
+        Line line2 = new Line(3, 1, 3, 6, 'x');
+
+        canvas.drawShape(line1);
+        canvas.drawShape(line2);
 
         // color with y
-        canvas.drawLine(1, 3, 20, 3, 'x');
-        canvas.drawLine(3, 1, 3, 6, 'x');
         canvas.fill(5, 1, 'y');
         String output = canvas.render();
         assertEquals(canvas20x6WithFilledArea(), output);

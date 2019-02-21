@@ -1,7 +1,6 @@
 package com.zuhlke.cs;
 
-import com.zuhlke.cs.model.Line;
-import com.zuhlke.cs.model.Rectangle;
+import com.zuhlke.cs.model.Shape;
 
 import java.util.*;
 
@@ -37,16 +36,13 @@ public class Canvas {
         }
     }
 
-    public void drawRectangle(Rectangle rectangle) {
-        rectangle.getLines()
-                .forEach(this::drawLine);
+    public void drawShape(Shape shape) {
+        shape.getLines()
+                .forEach(line -> drawLine(line.getX1(), line.getY1(),
+                        line.getX2(), line.getY2(), line.getColor()));
     }
 
-    public void drawLine(Line line) {
-        drawLine(line.getX1(), line.getY1(), line.getX2(), line.getY2(), line.getColor());
-    }
-
-    public void drawLine(final int x1, final int y1, final int x2, final int y2, char c) {
+    private void drawLine(final int x1, final int y1, final int x2, final int y2, char c) {
         if (x1 == x2) { // vertical line
             if (x1 > width || x1 < 1) {
                 return; // not visible
@@ -118,7 +114,9 @@ public class Canvas {
         }
     }
 
-    // we use package default in order to access the method from the unit tests
+    // Not part of the canvas API
+    // we use package default in order to
+    // access the method from the unit tests
     String render() {
         StringBuilder buffer = new StringBuilder();
 

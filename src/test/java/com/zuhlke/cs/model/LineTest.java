@@ -1,9 +1,8 @@
 package com.zuhlke.cs.model;
 
-import com.zuhlke.cs.model.Line;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class LineTest {
 
