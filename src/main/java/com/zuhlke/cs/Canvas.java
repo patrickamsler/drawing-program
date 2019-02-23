@@ -41,27 +41,22 @@ public class Canvas {
 
     public void drawShape(Shape shape) {
         shape.getLines().stream()
-                .filter(line -> line.intersects(drawingBounds))
+                .filter(line -> line.intersects(drawingBounds)) // we draw only lines that are visible in canvas
+                .map(line -> line.cut(drawingBounds)) // we cut lines longer then canvas
                 .forEach(line -> drawLine(line.getX1(), line.getY1(),
                         line.getX2(), line.getY2(), line.getColor()));
     }
 
     private void drawLine(final int x1, final int y1, final int x2, final int y2, char c) {
         if (x1 == x2) { // vertical line
-            // cut line if too long
-            int yStart = y1 < 1 ? 1 : y1;
-            final int yEnd = y2 > height ? height : y2;
             // draw line
-            for (; yStart <= yEnd; yStart++) {
-                pixels[x1][yStart] = c;
+            for (int i = y1; i <= y2; i++) {
+                pixels[x1][i] = c;
             }
         } else if (y1 == y2) { // horizontal line
-            // cut line if too long
-            int xStart = x1 < 1 ? 1 : x1;
-            final int xEnd = x2 > width ? width : x2;
             // draw line
-            for (; xStart <= xEnd; xStart++) {
-                pixels[xStart][y1] = c;
+            for (int i = x1; i <= x2; i++) {
+                pixels[i][y1] = c;
             }
         }
     }
@@ -80,13 +75,14 @@ public class Canvas {
         Pixel source = new Pixel(x, y);
         queue.add(source);
 
+        // we use breadth first traversal to find the neighbors
         while (!queue.isEmpty()) {
             Pixel next = queue.poll();
-            colorEmptyNeighborsAndAddToQueue(queue, next, color, actualColor);
+            colorNeighborsAndAddToQueue(queue, next, color, actualColor);
         }
     }
 
-    private void colorEmptyNeighborsAndAddToQueue(Queue<Pixel> queue, Pixel pixel, char color, char actualColor) {
+    private void colorNeighborsAndAddToQueue(Queue<Pixel> queue, Pixel pixel, char color, char actualColor) {
         int x = pixel.x;
         int y = pixel.y;
 
