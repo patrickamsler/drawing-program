@@ -1,4 +1,4 @@
-package com.zuhlke.cs;
+package com.zuhlke.cs.app;
 
 public class CanvasTestFixtures {
 

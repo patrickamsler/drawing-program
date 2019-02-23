@@ -1,17 +1,17 @@
-package com.zuhlke.cs;
+package com.zuhlke.cs.app;
 
 import com.zuhlke.cs.model.Line;
 import com.zuhlke.cs.model.Rectangle;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static com.zuhlke.cs.CanvasTestFixtures.*;
+import static com.zuhlke.cs.app.CanvasTestFixtures.*;
 
-public class CanvasTest {
+public class ConsoleCanvasTest {
 
     @Test
     public void newCanvasCreatesEmptyDrawingAreaWithBorder() {
-        Canvas canvas = new Canvas(20, 4);
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
 
         String output = canvas.render();
 
@@ -20,12 +20,12 @@ public class CanvasTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void newCanvasSmallerThan2ThrowsException() {
-        new Canvas(1, 1);
+        new ConsoleCanvas(1, 1);
     }
 
     @Test
     public void drawHorizontalLine() {
-        Canvas canvas = new Canvas(20, 4);
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
         Line line = new Line(1, 2, 6, 2, 'x');
 
         canvas.drawShape(line);
@@ -36,7 +36,7 @@ public class CanvasTest {
 
     @Test
     public void drawVerticalLine() {
-        Canvas canvas = new Canvas(20, 4);
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
         Line line = new Line(2, 1, 2, 4, 'x');
 
         canvas.drawShape(line);
@@ -47,7 +47,7 @@ public class CanvasTest {
 
     @Test
     public void drawLineLongerThanCanvas() {
-        Canvas canvas = new Canvas(20, 4);
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
         Line line = new Line(2, 0, 2, 42, 'x');
 
         canvas.drawShape(line);
@@ -58,7 +58,7 @@ public class CanvasTest {
 
     @Test
     public void linesOutOfBoundsAreNotVisible() {
-        Canvas canvas = new Canvas(20, 4);
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
         Line line1 = new Line(1, 5, 4, 5, 'x');
         Line line2 = new Line(42, 1, 42, 3, 'x');
 
@@ -71,7 +71,7 @@ public class CanvasTest {
 
     @Test
     public void drawRectangle() {
-        Canvas canvas = new Canvas(20, 4);
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
 
         Rectangle rectangle = new Rectangle(2,1,4,3);
         canvas.drawShape(rectangle);
@@ -83,7 +83,7 @@ public class CanvasTest {
 
     @Test
     public void fillShouldFillEmptyArea() {
-        Canvas canvas = new Canvas(20, 6);
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 6);
         Line line1 = new Line(1, 3, 20, 3, 'x');
         Line line2 = new Line(3, 1, 3, 6, 'x');
 
@@ -97,7 +97,7 @@ public class CanvasTest {
 
     @Test
     public void fillShouldFillColoredArea() {
-        Canvas canvas = new Canvas(20, 6);
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 6);
         Line line1 = new Line(1, 3, 20, 3, 'x');
         Line line2 = new Line(3, 1, 3, 6, 'x');
 
@@ -124,7 +124,7 @@ public class CanvasTest {
     public void fillLargeArea() {
         int width = 1000;
         int height = 1000;
-        Canvas canvas = new Canvas(width, height);
+        ConsoleCanvas canvas = new ConsoleCanvas(width, height);
 
         long start = System.currentTimeMillis();
         canvas.fill(5, 1, 'y');

@@ -1,5 +1,6 @@
-package com.zuhlke.cs;
+package com.zuhlke.cs.app;
 
+import com.zuhlke.cs.Canvas;
 import com.zuhlke.cs.model.Line;
 import com.zuhlke.cs.model.Rectangle;
 
@@ -9,12 +10,12 @@ public class CanvasApplication {
 
     private Canvas canvas;
 
-    private CanvasApplication() {
-
-    }
-
     public static void main(String... args) {
         CanvasApplication canvasApplication = new CanvasApplication();
+        canvasApplication.run();
+    }
+
+    private void run() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine().trim();
@@ -22,14 +23,16 @@ public class CanvasApplication {
                 continue;
             }
             try {
-                canvasApplication.parseInput(input);
+                parseInput(input);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    private void parseInput(String input) {
+    // we use package default in order to
+    // access the method from the unit tests
+    void parseInput(String input) {
         char cmd = input.toUpperCase().charAt(0);
         String args[] = input.split("\\s+");
         if (cmd != 'C' && cmd != 'Q' && canvas == null) {
@@ -40,7 +43,7 @@ public class CanvasApplication {
                 throwExceptionForIllegalNumOfArgs(input, 2);
                 int canvasWidth = parseInt(args[1]);
                 int canvasHeight = parseInt(args[2]);
-                canvas = new Canvas(canvasWidth, canvasHeight);
+                canvas = new ConsoleCanvas(canvasWidth, canvasHeight);
                 canvas.print();
                 break;
             case 'L':
@@ -81,5 +84,13 @@ public class CanvasApplication {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Number expected!");
         }
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    public void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
     }
 }
