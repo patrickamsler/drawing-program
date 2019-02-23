@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class Line implements Shape {
 
+    public static final char DEFAULT_LINE_COLOR = 'x';
+
     private final int x1;
     private final int y1;
     private final int x2;
@@ -13,7 +15,7 @@ public class Line implements Shape {
     private final char color;
 
     public Line(int x1, int y1, int x2, int y2) {
-        this(x1, y1, x2, y2, 'x');
+        this(x1, y1, x2, y2, DEFAULT_LINE_COLOR);
     }
 
     public Line(int x1, int y1, int x2, int y2, char color) {

@@ -13,7 +13,7 @@ public class Rectangle implements Shape {
     private final List<Line> lines = new ArrayList<>();
 
     public Rectangle(int x1, int y1, int x2, int y2) {
-        this(x1, y1, x2, y2, 'x');
+        this(x1, y1, x2, y2, Line.DEFAULT_LINE_COLOR);
     }
 
     public Rectangle(int x1, int y1, int x2, int y2, char color) {
