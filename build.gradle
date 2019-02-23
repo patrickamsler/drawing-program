@@ -16,3 +16,10 @@ dependencies {
     testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.24.5'
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.zuhlke.cs.app.CanvasApplication'
+    }
+    baseName = 'drawing_program'
+}

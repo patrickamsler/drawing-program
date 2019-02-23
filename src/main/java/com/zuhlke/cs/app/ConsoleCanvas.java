@@ -64,54 +64,53 @@ public class ConsoleCanvas implements Canvas {
     }
 
     @Override
-    public void fill(int x, int y, char color) {
+    public void fill(int x, int y, char fillColor) {
         if (x < 1 || x > width || y < 1 || y > height) {
             return;
         }
         char actualColor = pixels[x][y];
-        if (actualColor == color) {
+        if (actualColor == fillColor) {
             return;
         }
 
         LinkedList<Pixel> queue = new LinkedList<>();
-        pixels[x][y] = color;
+        pixels[x][y] = fillColor;
         Pixel source = new Pixel(x, y);
         queue.add(source);
 
         // we use breadth first traversal to find the neighbors
         while (!queue.isEmpty()) {
             Pixel next = queue.poll();
-            colorNeighborsAndAddToQueue(queue, next, color, actualColor);
+            colorNeighborsAndAddToQueue(queue, next, fillColor, actualColor);
         }
     }
 
-    private void colorNeighborsAndAddToQueue(Queue<Pixel> queue, Pixel pixel, char color, char actualColor) {
+    private void colorNeighborsAndAddToQueue(Queue<Pixel> queue, Pixel pixel, char fillColor, char actualColor) {
         int x = pixel.x;
         int y = pixel.y;
 
         //left
         if (x - 1 > 0 && pixels[x - 1][y] == actualColor) {
-            pixels[x - 1][y] = color;
+            pixels[x - 1][y] = fillColor;
             queue.add(new Pixel(x - 1, y));
         }
         //right
         if (x + 1 <= width && pixels[x + 1][y] == actualColor) {
-            pixels[x + 1][y] = color;
+            pixels[x + 1][y] = fillColor;
             queue.add(new Pixel(x + 1, y));
         }
         //up
         if (y - 1 > 0 && pixels[x][y - 1] == actualColor) {
-            pixels[x][y - 1] = color;
+            pixels[x][y - 1] = fillColor;
             queue.add(new Pixel(x, y - 1));
         }
         //down
         if (y + 1 <= height && pixels[x][y + 1] == actualColor) {
-            pixels[x][y + 1] = color;
+            pixels[x][y + 1] = fillColor;
             queue.add(new Pixel(x, y + 1));
         }
     }
 
-    // Not part of the canvas API
     // we use package default in order to
     // access the method from the unit tests
     String render() {
