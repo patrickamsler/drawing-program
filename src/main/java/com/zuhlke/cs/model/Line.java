@@ -30,13 +30,20 @@ public class Line implements Shape {
 
     @Override
     public List<Line> getLines() {
-        return Arrays.asList(new Line(x1, y1, x2, y2));
+        return Arrays.asList(new Line(x1, y1, x2, y2, color));
     }
 
     @Override
     public boolean intersects(Rectangle bounds) {
-        // TODO
-        return false;
+        if (x1 == x2 && // vertical line
+                (x1 > bounds.getX2() || x2 < bounds.getX1())) {
+            return false;
+        }
+        else if (y1 == y2 && // horizontal line
+                (y1 > bounds.getY2() || y2 < bounds.getY1())) {
+            return false;
+        }
+        return true;
     }
 
     public int getX1() {

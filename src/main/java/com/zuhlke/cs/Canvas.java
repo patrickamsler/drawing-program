@@ -1,5 +1,6 @@
 package com.zuhlke.cs;
 
+import com.zuhlke.cs.model.Rectangle;
 import com.zuhlke.cs.model.Shape;
 
 import java.util.*;
@@ -11,6 +12,7 @@ public class Canvas {
     private final char[][] pixels;
     private final int width;
     private final int height;
+    private final Rectangle drawingBounds;
 
     public Canvas(int width, int height) {
         if (width < 2 || height < 2) {
@@ -18,6 +20,7 @@ public class Canvas {
         }
         this.width = width;
         this.height = height;
+        drawingBounds = new Rectangle(1, 1, width, height);
         pixels = new char[width + 2][height + 2];
         initPixels();
     }
@@ -37,16 +40,14 @@ public class Canvas {
     }
 
     public void drawShape(Shape shape) {
-        shape.getLines()
+        shape.getLines().stream()
+                .filter(line -> line.intersects(drawingBounds))
                 .forEach(line -> drawLine(line.getX1(), line.getY1(),
                         line.getX2(), line.getY2(), line.getColor()));
     }
 
     private void drawLine(final int x1, final int y1, final int x2, final int y2, char c) {
         if (x1 == x2) { // vertical line
-            if (x1 > width || x1 < 1) {
-                return; // not visible
-            }
             // cut line if too long
             int yStart = y1 < 1 ? 1 : y1;
             final int yEnd = y2 > height ? height : y2;
@@ -55,9 +56,6 @@ public class Canvas {
                 pixels[x1][yStart] = c;
             }
         } else if (y1 == y2) { // horizontal line
-            if (y1 > height || y1 < 1) {
-                return; // not visible
-            }
             // cut line if too long
             int xStart = x1 < 1 ? 1 : x1;
             final int xEnd = x2 > width ? width : x2;
