@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class CanvasApplication {
 
+    private final static String CMD_PROMPT = "enter command: ";
+
     private ConsoleCanvas canvas;
 
     public static void main(String... args) {
@@ -16,6 +18,7 @@ public class CanvasApplication {
 
     void run(Scanner scanner) {
         while (true) {
+            System.out.print(CMD_PROMPT);
             String input = scanner.nextLine().trim();
             if (input.isEmpty()) {
                 continue;
