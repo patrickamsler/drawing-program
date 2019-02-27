@@ -32,7 +32,7 @@ public class ConsoleCanvasTest {
     @Test
     public void drawHorizontalLine() {
         ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
-        Line line = new Line(1, 2, 6, 2, 'x');
+        Line line = new Line(1, 2, 6, 2);
         String expected =
                 "----------------------\n" +
                 "|                    |\n" +
@@ -50,7 +50,7 @@ public class ConsoleCanvasTest {
     @Test
     public void drawVerticalLine() {
         ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
-        Line line = new Line(2, 1, 2, 4, 'x');
+        Line line = new Line(2, 1, 2, 4);
         String expected =
                 "----------------------\n" +
                 "| x                  |\n" +
@@ -68,7 +68,7 @@ public class ConsoleCanvasTest {
     @Test
     public void drawLineLongerThanCanvas() {
         ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
-        Line line = new Line(2, 0, 2, 42, 'x');
+        Line line = new Line(2, 0, 2, 42);
         String expected =
                 "----------------------\n" +
                 "| x                  |\n" +
@@ -86,7 +86,7 @@ public class ConsoleCanvasTest {
     @Test (expected = IllegalArgumentException.class)
     public void linesOutOfBoundsCannotBeDrawn() {
         ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
-        Line line = new Line(1, 5, 4, 5, 'x');
+        Line line = new Line(1, 5, 4, 5);
 
         canvas.drawShape(line);
     }
@@ -113,8 +113,8 @@ public class ConsoleCanvasTest {
     @Test
     public void fillShouldFillEmptyArea() {
         ConsoleCanvas canvas = new ConsoleCanvas(20, 6);
-        Line line1 = new Line(1, 3, 20, 3, 'x');
-        Line line2 = new Line(3, 1, 3, 6, 'x');
+        Line line1 = new Line(1, 3, 20, 3);
+        Line line2 = new Line(3, 1, 3, 6);
         String expected =
                 "----------------------\n" +
                 "|  xyyyyyyyyyyyyyyyyy|\n" +
@@ -136,8 +136,8 @@ public class ConsoleCanvasTest {
     @Test
     public void fillShouldFillColoredArea() {
         ConsoleCanvas canvas = new ConsoleCanvas(20, 6);
-        Line line1 = new Line(1, 3, 20, 3, 'x');
-        Line line2 = new Line(3, 1, 3, 6, 'x');
+        Line line1 = new Line(1, 3, 20, 3);
+        Line line2 = new Line(3, 1, 3, 6);
 
         canvas.drawShape(line1);
         canvas.drawShape(line2);

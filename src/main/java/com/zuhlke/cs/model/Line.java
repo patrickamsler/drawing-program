@@ -12,13 +12,8 @@ public class Line implements Shape {
     private final int y1;
     private final int x2;
     private final int y2;
-    private final char color;
 
     public Line(int x1, int y1, int x2, int y2) {
-        this(x1, y1, x2, y2, DEFAULT_LINE_COLOR);
-    }
-
-    public Line(int x1, int y1, int x2, int y2, char color) {
         if (!(x1 == x2 || y1 == y2)) {
             throw new IllegalArgumentException("Diagonal lines not possible");
         }
@@ -27,12 +22,11 @@ public class Line implements Shape {
         this.y1 = Math.min(y1, y2);
         this.x2 = Math.max(x1, x2);
         this.y2 = Math.max(y1, y2);
-        this.color = color;
     }
 
     @Override
     public List<Line> getLines() {
-        return Arrays.asList(new Line(x1, y1, x2, y2, color));
+        return Arrays.asList(new Line(x1, y1, x2, y2));
     }
 
     @Override
@@ -73,7 +67,7 @@ public class Line implements Shape {
     }
 
     public char getColor() {
-        return color;
+        return DEFAULT_LINE_COLOR;
     }
 
 

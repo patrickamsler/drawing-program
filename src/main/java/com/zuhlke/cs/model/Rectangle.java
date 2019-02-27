@@ -9,24 +9,18 @@ public class Rectangle implements Shape {
     private final int y1;
     private final int x2;
     private final int y2;
-    private final char color;
     private final List<Line> lines = new ArrayList<>();
 
     public Rectangle(int x1, int y1, int x2, int y2) {
-        this(x1, y1, x2, y2, Line.DEFAULT_LINE_COLOR);
-    }
-
-    public Rectangle(int x1, int y1, int x2, int y2, char color) {
         this.x1 = x1;
         this.x2 = x2;
         this.y1 = y1;
         this.y2 = y2;
-        this.color = color;
 
-        lines.add(new Line(x1, y1, x2, y1, color));
-        lines.add(new Line(x2, y1, x2, y2, color));
-        lines.add(new Line(x2, y2, x1, y2, color));
-        lines.add(new Line(x1, y2, x1, y1, color));
+        lines.add(new Line(x1, y1, x2, y1));
+        lines.add(new Line(x2, y1, x2, y2));
+        lines.add(new Line(x2, y2, x1, y2));
+        lines.add(new Line(x1, y2, x1, y1));
     }
 
     @Override
