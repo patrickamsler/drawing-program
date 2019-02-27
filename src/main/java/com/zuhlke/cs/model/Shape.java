@@ -1,8 +1,5 @@
 package com.zuhlke.cs.model;
 
-import com.zuhlke.cs.model.Line;
-import com.zuhlke.cs.model.Rectangle;
-
 import java.util.List;
 
 public interface Shape {
