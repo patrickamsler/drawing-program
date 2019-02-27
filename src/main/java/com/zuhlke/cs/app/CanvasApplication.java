@@ -1,6 +1,5 @@
 package com.zuhlke.cs.app;
 
-import com.zuhlke.cs.Canvas;
 import com.zuhlke.cs.model.Line;
 import com.zuhlke.cs.model.Rectangle;
 
@@ -8,19 +7,20 @@ import java.util.Scanner;
 
 public class CanvasApplication {
 
-    private Canvas canvas;
+    private ConsoleCanvas canvas;
 
     public static void main(String... args) {
         CanvasApplication canvasApplication = new CanvasApplication();
-        canvasApplication.run();
+        canvasApplication.run(new Scanner(System.in));
     }
 
-    private void run() {
-        Scanner scanner = new Scanner(System.in);
+    void run(Scanner scanner) {
         while (true) {
             String input = scanner.nextLine().trim();
             if (input.isEmpty()) {
                 continue;
+            } else if (input.toUpperCase().startsWith("Q")) {
+                break; // end the drawing program
             }
             try {
                 parseInput(input);
@@ -35,7 +35,7 @@ public class CanvasApplication {
     void parseInput(String input) {
         char cmd = input.toUpperCase().charAt(0);
         String args[] = input.split("\\s+");
-        if (cmd != 'C' && cmd != 'Q' && canvas == null) {
+        if (cmd != 'C' && canvas == null) {
             throw new IllegalArgumentException("Create new canvas first. E.g. 'C 4 5'");
         }
         switch (cmd) {
@@ -63,9 +63,6 @@ public class CanvasApplication {
                 canvas.fill(parseInt(args[1]), parseInt(args[2]), args[3].charAt(0));
                 canvas.print();
                 break;
-            case 'Q':
-                System.exit(0);
-                break;
             default:
                 throw new IllegalArgumentException("Unknown command: '" + cmd + "'");
         }
@@ -86,11 +83,8 @@ public class CanvasApplication {
         }
     }
 
-    public Canvas getCanvas() {
+    public ConsoleCanvas getCanvas() {
         return canvas;
     }
 
-    public void setCanvas(Canvas canvas) {
-        this.canvas = canvas;
-    }
 }

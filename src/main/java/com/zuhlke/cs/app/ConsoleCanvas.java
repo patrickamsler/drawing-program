@@ -1,12 +1,11 @@
 package com.zuhlke.cs.app;
 
-import com.zuhlke.cs.Canvas;
-import com.zuhlke.cs.Shape;
+import com.zuhlke.cs.model.Shape;
 import com.zuhlke.cs.model.Rectangle;
 
 import java.util.*;
 
-public class ConsoleCanvas implements Canvas {
+public class ConsoleCanvas {
 
     public final static char EMPTY_PIXEL = ' ';
 
@@ -40,7 +39,6 @@ public class ConsoleCanvas implements Canvas {
         }
     }
 
-    @Override
     public void drawShape(Shape shape) {
         shape.getLines().stream()
                 .filter(line -> line.intersects(drawingBounds)) // we draw only lines that are visible in canvas
@@ -63,7 +61,6 @@ public class ConsoleCanvas implements Canvas {
         }
     }
 
-    @Override
     public void fill(int x, int y, char fillColor) {
         if (x < 1 || x > width || y < 1 || y > height) {
             return;
@@ -126,7 +123,6 @@ public class ConsoleCanvas implements Canvas {
         return buffer.toString();
     }
 
-    @Override
     public void print() {
         System.out.println(render());
     }

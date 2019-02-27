@@ -1,7 +1,5 @@
 package com.zuhlke.cs.model;
 
-import com.zuhlke.cs.Shape;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
