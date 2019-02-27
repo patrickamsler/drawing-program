@@ -48,7 +48,7 @@ public class Line implements Shape {
         return true;
     }
 
-    public Line cut(Rectangle bounds) {
+    public Line truncate(Rectangle bounds) {
         int xStart = x1 < bounds.getX1() ? bounds.getX1() : x1;
         int xEnd = x2 > bounds.getX2() ? bounds.getX2() : x2;
         int yStart = y1 < bounds.getY1() ? bounds.getY1() : y1;

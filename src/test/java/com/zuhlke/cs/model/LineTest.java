@@ -51,13 +51,13 @@ public class LineTest {
     }
 
     @Test
-    public void cutLinesLongerThanBounds() {
+    public void truncateLinesLongerThanBounds() {
         Line line1 = new Line(2, 1, 2, 42);
         Line line2 = new Line(1, 2, 42, 2);
         Rectangle bounds = new Rectangle(1, 1, 5, 5);
 
-        Line cut1 = line1.cut(bounds);
-        Line cut2 = line2.cut(bounds);
+        Line cut1 = line1.truncate(bounds);
+        Line cut2 = line2.truncate(bounds);
 
         assertLineEquals(cut1, 2, 1, 2, 5);
         assertLineEquals(cut2, 1, 2, 5, 2);

@@ -83,24 +83,12 @@ public class ConsoleCanvasTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void linesOutOfBoundsAreNotVisible() {
+    @Test (expected = IllegalArgumentException.class)
+    public void linesOutOfBoundsCannotBeDrawn() {
         ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
-        Line line1 = new Line(1, 5, 4, 5, 'x');
-        Line line2 = new Line(42, 1, 42, 3, 'x');
-        String expected =
-                "----------------------\n" +
-                "|                    |\n" +
-                "|                    |\n" +
-                "|                    |\n" +
-                "|                    |\n" +
-                "----------------------\n";
+        Line line = new Line(1, 5, 4, 5, 'x');
 
-        canvas.drawShape(line1);
-        canvas.drawShape(line2);
-        String actual = canvas.render();
-
-        assertEquals(expected, actual);
+        canvas.drawShape(line);
     }
 
     @Test

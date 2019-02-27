@@ -1,9 +1,11 @@
 package com.zuhlke.cs.app;
 
+import com.zuhlke.cs.model.Line;
 import com.zuhlke.cs.model.Shape;
 import com.zuhlke.cs.model.Rectangle;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ConsoleCanvas {
 
@@ -40,9 +42,17 @@ public class ConsoleCanvas {
     }
 
     public void drawShape(Shape shape) {
-        shape.getLines().stream()
+        List<Line> drawableLines = shape.getLines().stream()
                 .filter(line -> line.intersects(drawingBounds)) // we draw only lines that are visible in canvas
-                .map(line -> line.cut(drawingBounds)) // we cut lines longer then canvas
+                .map(line -> line.truncate(drawingBounds)) // we truncate lines longer then canvas
+                .collect(Collectors.toList());
+
+        if (drawableLines.isEmpty()) {
+            throw new IllegalArgumentException("Coordinates out of bounds!");
+        }
+
+        // we draw the visible part of the shape
+        drawableLines
                 .forEach(line -> drawLine(line.getX1(), line.getY1(),
                         line.getX2(), line.getY2(), line.getColor()));
     }
@@ -63,7 +73,7 @@ public class ConsoleCanvas {
 
     public void fill(int x, int y, char fillColor) {
         if (x < 1 || x > width || y < 1 || y > height) {
-            return;
+            throw new IllegalArgumentException(" Coordinates out of bounds!");
         }
         char actualColor = pixels[x][y];
         if (actualColor == fillColor) {
