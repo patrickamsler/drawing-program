@@ -48,6 +48,157 @@ public class ConsoleCanvasTest {
     }
 
     @Test
+    public void drawHorizontalLineUndo() {
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
+        Line line = new Line(1, 2, 6, 2);
+        String expected =
+            "----------------------\n" +
+            "|                    |\n" +
+            "|xxxxxx              |\n" +
+            "|                    |\n" +
+            "|                    |\n" +
+            "----------------------\n";
+
+        canvas.drawShape(line);
+        String actual = canvas.render();
+        assertEquals(expected, actual);
+
+        canvas.undo();
+        String actualUndo = canvas.render();
+
+        String expectedAfterUndo =
+                "----------------------\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "----------------------\n";
+
+        assertEquals(expectedAfterUndo, actualUndo);
+    }
+
+    @Test
+    public void drawHorizontalLineRedo() {
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
+        Line line = new Line(1, 2, 6, 2);
+        String expected =
+                "----------------------\n" +
+                "|                    |\n" +
+                "|xxxxxx              |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "----------------------\n";
+
+        canvas.drawShape(line);
+        String actual = canvas.render();
+        assertEquals(expected, actual);
+
+        canvas.undo();
+        String actualUndo = canvas.render();
+
+        String expectedAfterUndo =
+                "----------------------\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "----------------------\n";
+
+        assertEquals(expectedAfterUndo, actualUndo);
+
+        canvas.redo();
+        String actualRedo = canvas.render();
+        assertEquals(expected, actualRedo);
+    }
+
+    @Test
+    public void drawHorizontalLineAfterRedo() {
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
+        Line line = new Line(1, 2, 6, 2);
+        String expected =
+                "----------------------\n" +
+                        "|                    |\n" +
+                        "|xxxxxx              |\n" +
+                        "|                    |\n" +
+                        "|                    |\n" +
+                        "----------------------\n";
+
+        canvas.drawShape(line);
+        String actual = canvas.render();
+        assertEquals(expected, actual);
+
+        canvas.undo();
+        String actualUndo = canvas.render();
+
+        String expectedAfterUndo =
+                "----------------------\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "----------------------\n";
+
+        assertEquals(expectedAfterUndo, actualUndo);
+
+        Line line2 = new Line(1, 2, 4, 2);
+        canvas.drawShape(line2);
+
+        String expected2 =
+                "----------------------\n" +
+                "|                    |\n" +
+                "|xxxx                |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "----------------------\n";
+
+        String actual2 = canvas.render();
+        assertEquals(expected2, actual2);
+
+        canvas.redo();
+        String actualRedo = canvas.render();
+        assertEquals(expected2, actualRedo);
+    }
+
+    @Test
+    public void redoAfterUndo() {
+        ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
+        Line line = new Line(1, 2, 6, 2);
+        String expectedStart =
+                "----------------------\n" +
+                "|                    |\n" +
+                "|xxxxxx              |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "----------------------\n";
+
+        canvas.drawShape(line);
+        String actual = canvas.render();
+        assertEquals(expectedStart, actual);
+
+        canvas.undo();
+        String actualUndo = canvas.render();
+
+        String expectedAfterUndo =
+                "----------------------\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "----------------------\n";
+
+        assertEquals(expectedAfterUndo, actualUndo);
+
+        canvas.redo();
+        assertEquals(expectedStart, canvas.render());
+
+        canvas.redo();
+        assertEquals(expectedStart, canvas.render());
+
+        canvas.undo();
+        assertEquals(expectedAfterUndo, canvas.render());
+    }
+
+    @Test
     public void drawVerticalLine() {
         ConsoleCanvas canvas = new ConsoleCanvas(20, 4);
         Line line = new Line(2, 1, 2, 4);

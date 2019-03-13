@@ -66,6 +66,14 @@ public class CanvasApplication {
                 canvas.fill(parseInt(args[1]), parseInt(args[2]), args[3].charAt(0));
                 canvas.print();
                 break;
+            case 'U':
+                canvas.undo();
+                canvas.print();
+                break;
+            case 'E':
+                canvas.redo();
+                canvas.print();
+                break;
             default:
                 throw new IllegalArgumentException("Unknown command: '" + cmd + "'");
         }

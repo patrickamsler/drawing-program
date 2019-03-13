@@ -11,7 +11,9 @@ public class ConsoleCanvas {
 
     public final static char EMPTY_PIXEL = ' ';
 
-    private final char[][] pixels;
+    private char[][] pixels;
+    private final LinkedList<char[][]> undoStack = new LinkedList<>();
+    private final LinkedList<char[][]> redoStack = new LinkedList<>();
     private final int width;
     private final int height;
     private final Rectangle drawingBounds;
@@ -51,10 +53,38 @@ public class ConsoleCanvas {
             throw new IllegalArgumentException("Coordinates out of bounds!");
         }
 
+        char [][] pixelsCopy = CanvasUtil.deepCopyArray(pixels);
+        undoStack.push(pixelsCopy);
+        redoStack.clear();
+
         // we draw the visible part of the shape
         drawableLines
                 .forEach(line -> drawLine(line.getX1(), line.getY1(),
                         line.getX2(), line.getY2(), line.getColor()));
+    }
+
+    public void undo() {
+        try {
+            char[][] pixelsCopy = CanvasUtil.deepCopyArray(pixels);
+            redoStack.push(pixelsCopy);
+            pixels = undoStack.pop();
+        } catch (NoSuchElementException | EmptyStackException e) {
+
+        }
+    }
+
+    public void redo() {
+        try {
+            if (redoStack.isEmpty()) {
+                return;
+            }
+
+            char[][] pixelsCopy = CanvasUtil.deepCopyArray(pixels);
+            undoStack.push(pixelsCopy);
+            pixels = redoStack.pop();
+        } catch (NoSuchElementException e) {
+
+        }
     }
 
     private void drawLine(final int x1, final int y1, final int x2, final int y2, char c) {

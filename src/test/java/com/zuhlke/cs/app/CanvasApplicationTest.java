@@ -62,6 +62,70 @@ public class CanvasApplicationTest {
     }
 
     @Test
+    public void drawLineUndo() {
+        String expected =
+                "----------------------\n" +
+                "|                    |\n" +
+                "|xxxxxx              |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "----------------------\n";
+
+        CanvasApplication app = new CanvasApplication();
+        app.parseInput("C 20 4");
+        app.parseInput("L 1 2 6 2");
+        assertEquals(expected, app.getCanvas().render());
+
+        app.parseInput("U");
+
+        String expectedAfterUndo =
+                "----------------------\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "|                    |\n" +
+                "----------------------\n";
+
+        assertEquals(expectedAfterUndo, app.getCanvas().render());
+    }
+
+    @Test
+    public void drawLineUndoAfterRedo() {
+        String expected =
+                "----------------------\n" +
+                        "|                    |\n" +
+                        "|xxxxxx              |\n" +
+                        "|                    |\n" +
+                        "|                    |\n" +
+                        "----------------------\n";
+
+        CanvasApplication app = new CanvasApplication();
+        app.parseInput("C 20 4");
+        app.parseInput("L 1 2 6 2");
+        assertEquals(expected, app.getCanvas().render());
+
+        app.parseInput("U");
+
+        String expectedAfterUndo =
+                "----------------------\n" +
+                        "|                    |\n" +
+                        "|                    |\n" +
+                        "|                    |\n" +
+                        "|                    |\n" +
+                        "----------------------\n";
+
+        assertEquals(expectedAfterUndo, app.getCanvas().render());
+
+        app.parseInput("E");
+
+        assertEquals(expected, app.getCanvas().render());
+
+        app.parseInput("u");
+
+        assertEquals(expectedAfterUndo, app.getCanvas().render());
+    }
+
+    @Test
     public void drawRectangle() {
         String expected =
                 "----------------------\n" +
