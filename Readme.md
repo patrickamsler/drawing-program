@@ -24,7 +24,7 @@ Requires Java 8 or higher
 * run tests: `./gradlew test`
 * build: `./gradlew build`
 
-Create and executable jar and start the drawing program:
+Create an executable jar and start the drawing program:
 1. `./gradlew jar`
 2. `java -jar build/libs/drawing_program-1.0-SNAPSHOT.jar`
 
