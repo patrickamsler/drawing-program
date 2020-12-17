@@ -69,7 +69,7 @@ public class ConsoleCanvas {
             redoStack.push(pixelsCopy);
             pixels = undoStack.pop();
         } catch (NoSuchElementException | EmptyStackException e) {
-
+            System.out.println(e.getMessage());
         }
     }
 
@@ -83,7 +83,7 @@ public class ConsoleCanvas {
             undoStack.push(pixelsCopy);
             pixels = redoStack.pop();
         } catch (NoSuchElementException e) {
-
+            System.out.println(e.getMessage());
         }
     }
 
