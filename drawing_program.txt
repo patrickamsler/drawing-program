@@ -22,6 +22,8 @@ B x y c         Should fill the entire area connected to (x,y) with "colour" c. 
                 behaviour of this is the same as that of the "bucket fill" tool in paint
                 programs.
 Q               Should quit the program.
+U               Undo the last command.
+E               Redo the last command.
 
 __Sample I/O__
 
