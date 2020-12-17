@@ -43,10 +43,10 @@ public class Line implements Shape {
     }
 
     public Line truncate(Rectangle bounds) {
-        int xStart = x1 < bounds.getX1() ? bounds.getX1() : x1;
-        int xEnd = x2 > bounds.getX2() ? bounds.getX2() : x2;
-        int yStart = y1 < bounds.getY1() ? bounds.getY1() : y1;
-        int yEnd = y2 > bounds.getY2() ? bounds.getY2() : y2;
+        int xStart = Math.max(x1, bounds.getX1());
+        int xEnd = Math.min(x2, bounds.getX2());
+        int yStart = Math.max(y1, bounds.getY1());
+        int yEnd = Math.min(y2, bounds.getY2());
         return new Line(xStart, yStart, xEnd, yEnd);
     }
 

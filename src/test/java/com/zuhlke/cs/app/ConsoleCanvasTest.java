@@ -338,7 +338,7 @@ public class ConsoleCanvasTest {
 
     @Test
     public void fillLargeArea() {
-        int timeThresholdMs = 500;
+        int timeThresholdMs = 1000;
         int width = 1000;
         int height = 1000;
         ConsoleCanvas canvas = new ConsoleCanvas(width, height);
